@@ -23,7 +23,7 @@ $ npm run start
 
 
 ```
- it will run on localhost:300/
+ it will run on localhost:3000/
 ## Usage
 test on postman or browser using this format with a get request:
 
