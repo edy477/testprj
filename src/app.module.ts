@@ -7,14 +7,17 @@ import { UrlModule } from './task/url.module';
 // TypeOrmModule database integration
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { dbdatasource } from './task/data.source';
+import {UrlService} from "./task/url.service";
+import {UrlEntity} from "./task/url.entity";
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(dbdatasource),
+    TypeOrmModule.forFeature([UrlEntity]),
     UrlModule,
   ],
   controllers: [AppController], 
-  providers: [AppService], 
+  providers: [UrlService],
 })
 
 export class AppModule {} 

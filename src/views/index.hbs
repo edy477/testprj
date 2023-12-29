@@ -1,10 +1,32 @@
+<!-- views/url/list.hbs -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of URLs</title>
 </head>
 <body>
-{{ message }}
+<h1>Home</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Original URL</th>
+        <th>Shortened URL</th>
+        <th>Counter</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each allUrls}}
+        <tr>
+            <td>{{url_id}}</td>
+            <td>{{url_original}}</td>
+            <td>localhost:3000/{{url_shortened}}</td>
+            <td>{{counter}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>
 </body>
 </html>

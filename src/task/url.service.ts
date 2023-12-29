@@ -16,27 +16,7 @@ export class UrlService {
   }
 
   async createUrlRecord(urlParam: string): Promise<UrlEntity> {
-   /* const parsedUrl = urlUtils.parse(urlParam);
-    const domainName = parsedUrl.hostname || ''; // Extract domain name from the URL
-    // @ts-ignore
-    const existingRecord = await this.urlRepository.findOne({
-      url_original: urlParam,
-    });
-    console.log(existingRecord);
-    if (existingRecord) {
-      // If a record exists, update the counter field and return the updated record
-      existingRecord.counter = (existingRecord.counter || 0) + 1;
-      return this.urlRepository.save(existingRecord);
-    }
 
-
-
-    const newUrlRecord = this.urlRepository.create({ url_original: urlParam, url_shortened: "", counter:0});
-    const savedUrlRecord = await this.urlRepository.save(newUrlRecord);
-    // Update the "name" field based on the generated ID and base path
-    savedUrlRecord.url_shortened = `localhost:3000/${savedUrlRecord.url_id}`;
-
-    return await this.urlRepository.save(newUrlRecord);*/
     try {
       const parsedUrl = urlUtils.parse(urlParam);
       const domainName = parsedUrl.hostname || '';
@@ -48,9 +28,9 @@ export class UrlService {
         where: [{ url_original: urlParam }],
 
       });
-      console.log(existingRecord);
+
       if (existingRecord) {
-        // If a record exists, update the counter field and return the updated record
+
         existingRecord.counter = (existingRecord.counter || 0) + 1;
         return this.urlRepository.save(existingRecord);
       }
@@ -62,7 +42,7 @@ export class UrlService {
       const savedUrlRecord = await this.urlRepository.save(newUrlRecord);
       const shortenedUrl = this.generateShortenedUrl();
 
-      // Update the "name" field based on the generated ID and base path
+
       savedUrlRecord.url_shortened = shortenedUrl; //`localhost:3000/${savedUrlRecord.url_id}`;
 
       // Save the record again with the updated "name" field
@@ -97,4 +77,20 @@ export class UrlService {
 
     return result || '0';
   }
+
+  async getAllUrls(): Promise<UrlEntity[]> {
+    return this.urlRepository.find();
+  }
+
+  async getOriginalUrlByShortenedUrl(
+    shortenedUrl: string,
+  ): Promise<string | null> {
+    const urlRecord = await this.urlRepository.findOne({
+      where: [{ url_shortened: shortenedUrl }],
+
+    });
+    return urlRecord ? urlRecord.url_original : null;
+  }
+
+
 }
