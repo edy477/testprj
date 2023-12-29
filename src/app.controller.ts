@@ -1,10 +1,16 @@
 import {Controller, Get, Render} from '@nestjs/common';
 import { AppService } from './app.service';
 import {UrlService} from "./task/url.service";
+import {UrlSeederService} from "./task/url-seeder.service";
 
 @Controller()
 export class AppController {
-  constructor(private readonly urlService: UrlService) {}
+  constructor(
+    private readonly urlService: UrlService)
+  {
+
+
+  }
 
   @Get()
   @Render('index')
@@ -12,4 +18,6 @@ export class AppController {
     const allUrls = await this.urlService.getAllUrls(); // Call getAllUrls from UrlService
     return { allUrls };
   }
+
+
 }

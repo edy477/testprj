@@ -8,6 +8,7 @@ import { UrlModule } from './task/url.module';
 import { TypeOrmModule } from '@nestjs/typeorm'; 
 import { dbdatasource } from './task/data.source';
 import {UrlService} from "./task/url.service";
+import {UrlSeederService} from "./task/url-seeder.service";
 import {UrlEntity} from "./task/url.entity";
 
 @Module({
@@ -17,7 +18,15 @@ import {UrlEntity} from "./task/url.entity";
     UrlModule,
   ],
   controllers: [AppController], 
-  providers: [UrlService],
+  providers: [UrlService, UrlSeederService],
 })
 
-export class AppModule {} 
+export class AppModule {
+  constructor(private readonly urlSeederService: UrlSeederService) {
+    this.seed();
+  }
+
+  async seed(): Promise<void> {
+    await this.urlSeederService.seed();
+  }
+}

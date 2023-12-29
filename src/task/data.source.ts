@@ -1,6 +1,7 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
+import {SeederOptions} from "typeorm-extension";
 
-export const dbdatasource: DataSourceOptions = {
+export const dbdatasource: DataSourceOptions & SeederOptions = {
   // TypeORM PostgreSQL DB Drivers
     type: 'mysql',
     host: 'localhost',
@@ -10,11 +11,12 @@ export const dbdatasource: DataSourceOptions = {
     // Database name
     database: 'task',
     // Synchronize database schema with entities 
-    synchronize: false,
+    synchronize: true,
     // TypeORM Entity
     entities: ['build/task/url.entity.js'],
     // Your Migration path
     migrations: ['build/task/migrations/*.js'],
+  seeds: ['build/task/seeds/**/*.js'],
     migrationsTableName: "task_migrations",
 
 };
