@@ -32,7 +32,9 @@ test on postman or browser using this format with a get request:
 
 to  view  of a list of  the shortened urls:  http://localhost:3000/
 
-copy and paste the shortened url in the Shortened URL  column on a new window  redirect to the original URL
+"Copy and paste the shortened URL into the 'Shortened URL' column in a new window to be redirected to the original URL."
+
+
 
 ## Description 
 to short the url the code uses a  base62 encoding algorithm
